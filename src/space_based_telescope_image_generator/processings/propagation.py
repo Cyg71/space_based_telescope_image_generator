@@ -1,10 +1,11 @@
-import math as m
-import numpy as np
 import re
 import datetime
+import math as m
+import numpy as np
+import matplotlib.pyplot as plt
+
 from datetime import timedelta
 from numpy.typing import NDArray
-import matplotlib.pyplot as plt
 
 MU = 3.986004418e14     # [m3/s2] Standard gravitational constant of the Earth
 J2 = 1082.62668e-6 		# [-] Perturbation constant from gravitational potential
@@ -224,11 +225,8 @@ def perturbations(pos: NDArray, vel: NDArray) -> tuple[NDArray, NDArray]:
     return acc, jerk
 
 a, e, i, Omega, omega, nu, date = tle2keplerian(TLE)
-print('Keplerian elements: ', a, e, i, Omega, omega, nu, date)
 pos, vel = keplerian2cartesian(a, e, i, Omega, omega, nu)
-print('\nState vectors: ', pos, vel)
 acc, jerk = perturbations(pos, vel)
-print('\nPerturbations: ', acc, jerk)
 
 # Simulation parameters
 nb_days = 1						# [day] Number of days of propagation
